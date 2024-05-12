@@ -1,0 +1,26 @@
+<div class="flex  justify-center items-center h-[500px]">
+  <div class="w-xl rounded overflow-hidden shadow-lg ">
+    <div class="px-6 py-4">
+      <div class="flex font-bold text-xl mb-5 items-center justify-center">Connect App</div>
+      <form [formGroup]="registerForm" class="flex flex-col space-y-4 w-80" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col">
+          <label for="name" class="text-gray-700 mb-2">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" formControlName="name" class="rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+          <div *ngIf="registerForm.controls['name'].errors?.['required'] && registerForm.controls['name'].touched" class="text-red-500 m-2 text-sm">Name is required</div>
+          <div *ngIf="registerForm.controls['name'].errors?.['pattern'] && registerForm.controls['name'].touched" class="text-red-500 m-2 text-sm">Invalid name</div>
+        </div>
+      
+        <div class="flex flex-col">
+          <label for="email" class="text-gray-700 mb-2">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter your Email" formControlName="email" class="rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+          <div *ngIf="registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched" class="text-red-500 m-2 text-sm ">Email is required</div>
+          <div *ngIf="registerForm.controls['email'].errors?.['pattern'] && registerForm.controls['email'].touched" class="text-red-500 m-2 text-sm">Invalid email address</div>
+        </div>
+        <div class="flex items-center justify-between w-fit [view-transition-name:toolbar-text]">
+          <a routerLink="/signin" class="text-blue-950 hover:underline">Have an account?</a>
+        </div>
+        <button type="submit" class="bg-neutral-50 text-black border border-blue-950 rounded-lg px-4 py-2 hover:bg-blue-950 transition duration-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-950" >Sign up</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+export const authURL:string= `http://localhost:5000/user`

@@ -1,0 +1,47 @@
+<nav class="bg-blue-950 p-3 shadow-md shadow-slate-500">
+  <div class="container mx-auto flex justify-between items-center">
+    <div>
+      <ul class="flex text-white gap-16 justify-between items-center">
+        <li
+          *ngIf="isLoggedIn"
+          class="rounded-full overflow-hidden w-[40px] h-[40px]"
+        >
+          <img
+            id="profile-image"
+            [ngSrc]="userImage"
+            alt="user"
+            class="object-cover w-full h-full"
+            style="max-width: none"
+            width="40"
+            height="40"
+            priority
+            
+          />
+        </li>
+        <li *ngIf="isLoggedIn"><a [routerLink]="'/profile'">Profile</a></li>
+        <li *ngIf="isLoggedIn"><a [routerLink]="'/chat'">Chat</a></li>
+      </ul>
+    </div>
+    <div>
+      <button
+        *ngIf="!isLoggedIn"
+        [routerLink]="'/signin'"
+        class="text-white border border-white rounded-md px-4 py-1 hover:bg-blue-900 transition duration-500  focus:outline-none focus:ring-2 focus:ring-black"
+      >
+        Login
+      </button>
+      <button
+        *ngIf="isLoggedIn"
+        type="submit"
+        (click)="logout()"
+        class="text-white border border-white rounded-md px-4 py-1 hover:bg-blue-900 transition duration-500  focus:outline-none focus:ring-2 focus:ring-black"
+      >
+        Logout
+      </button>
+     
+    </div>
+  </div>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>

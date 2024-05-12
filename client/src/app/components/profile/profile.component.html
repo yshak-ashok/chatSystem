@@ -1,0 +1,35 @@
+<div class="h-[500px] flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <div class="m-3 rounded-full relative">
+      <div class="rounded-full overflow-hidden w-[150px] h-[150px]">
+        <img
+          id="profile-image"
+          [ngSrc]="profilePicture"
+          alt="Profile Image"
+          class="object-cover w-full h-full"
+          style="max-width: none"
+          width="150"
+          height="178"
+          priority
+        
+        />
+      </div>
+      <input
+        type="file"
+        name="profile"
+        id="profile-upload"
+        class="hidden"
+        accept="image/*"
+        (change)="uploadImage($event)"
+      />
+      <label
+        for="profile-upload"
+        class="absolute inset-0 cursor-pointer"
+      ></label>
+    </div>
+    <div class="text-center text-lg font-semibold m-2">
+      <p>{{ userName }}</p>
+      <p>{{ userEmail }}</p>
+    </div>
+  </div>
+</div>

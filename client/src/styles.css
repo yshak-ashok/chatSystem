@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.toast-top-right {
+  margin-top: 50px;
+}
+::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+}
+::-webkit-scrollbar-track {
+  background: #ffffff; /* Color of the scrollbar track */
+}
+::-webkit-scrollbar-thumb {
+  background: #777777; /* Color of the scrollbar handle */
+  border-radius: 4px; /* Roundness of the scrollbar handle */
+}

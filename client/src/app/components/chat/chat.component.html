@@ -1,0 +1,122 @@
+<div class="flex h-[550px]">
+  <!-- Users List -->
+  <div class="w-1/4 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Chats</h2>
+    <!-- Dummy Users List -->
+    <button
+      class="flex items-center mb-2 cursor-pointer hover:bg-slate-200 transition-colors duration-200 w-full border-b-2 rounded-md"
+      *ngFor="let user of userList"
+      (click)="selectedUserHandler(user._id)"
+    >
+      <div class="flex items-center justify-between my-2 ml-3 w-full">
+        <div class="rounded-full overflow-hidden w-[40px] h-[40px] mr-3">
+          <ng-container *ngIf="user.image">
+            <img
+              id="profile-image"
+              [ngSrc]="user.image"
+              alt="user"
+              class="object-cover w-full h-full"
+              style="max-width: none"
+              width="40"
+              height="40"
+              loading="lazy"
+            />
+          </ng-container>
+
+          <ng-container *ngIf="!user.image">
+            <img
+              id="profile-image"
+              [ngSrc]="userImage"
+              alt="user"
+              class="object-cover w-full h-full"
+              style="max-width: none"
+              width="40"
+              height="40"
+              loading="lazy"
+            />
+          </ng-container>
+        </div>
+        <!-- Name centered -->
+        <p class="text-gray-800 text-start flex-1">{{ user.name }}</p>
+        <div
+          class="w-2 h-2 rounded-full ml-2"
+          [ngClass]="user.isActive ? 'bg-green-500' : 'bg-red-500'"
+        ></div>
+      </div>
+    </button>
+  </div>
+  <!-- Chat Box -->
+  <div *ngIf="!receiverId" class="w-3/4 flex flex-col items-center justify-center" >
+    <h3 class="text-center font-bold">CONNECT YOUR FRIEND'S</h3>
+  </div>
+  <div *ngIf="receiverId" class="w-3/4 flex flex-col">
+    <!-- Chat Messages -->
+    
+
+
+
+    <ng-container *ngIf="receiver">
+      <!-- Receiver information -->
+      <div class="h-[70px] bg-gray-50 flex justify-start items-center sticky top-0 border-b-2">
+        <!-- Receiver image -->
+        <ng-container *ngIf="receiver.image">
+          <img [src]="receiver.image" alt="user" class="object-cover rounded-full overflow-hidden w-[40px] h-[40px] mx-2 " style="max-width: none" />
+        </ng-container>
+        <ng-container *ngIf="!receiver.image">
+          <img [src]="userImage" alt="user"class="object-cover rounded-full overflow-hidden w-[40px] h-[40px] mx-2 " style="max-width: none"  />
+        </ng-container>
+        <!-- Receiver name and status -->
+        <div>
+          <p class="text-[14px] font-medium mb-0 flex justify-center items-center">{{ receiver?.name }}</p>
+          <p class="text-xs">{{ receiver.isActive ? "Online" : "Offline" }}</p>
+        </div>
+      </div>
+    
+      <!-- Chat messages -->
+      <div class="flex-1 overflow-y-auto mb-4 p-2" #chatContainer>
+        <ng-container *ngFor="let groupedMessages of groupedMessageArray">
+          <!-- Date separator -->
+          <div class="text-center mb-2">
+            <span class="px-2 py-1 rounded-3xl border border-black text-[10px]">{{ groupedMessages.date }}</span>
+          </div>
+    
+          <!-- Messages -->
+          <div class="bg-no-repeat bg-cover bg-[center_center] overflow-y-auto">
+            <div *ngFor="let item of groupedMessages.messages" [ngClass]="item?.id === sender?._id ? 'flex justify-end ' : ''">
+              <p *ngIf="receiver?._id == item?.id || sender?._id == item?.id" class="bg-slate-200 p-[7px]  w-[fit-content] max-w-[90%] mb-[15px]"
+                [ngClass]="item?.id === receiver?._id ? 'bg-slate-300 rounded-t-xl rounded-e-xl' : 'rounded-t-xl rounded-s-xl'">
+               <span class="block text-sm "> {{ item?.message }} </span> 
+               <span class="text-[10px]  flex justify-end"> {{ item.timestamp | timestampFormat }}</span>
+             
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    
+    
+
+
+    
+    <!-- Message Input Box -->
+    <div class="flex items-center m-5">
+      <input
+        type="text"
+        placeholder="Type a message"
+        class="flex-1 border border-gray-200 rounded-3xl px-4 py-2 mr-2 focus:outline-none focus:border-blue-950"
+        [(ngModel)]="messageText"
+        (keyup)=" textData()"
+      />
+    
+      <button 
+        [disabled]="!isText"
+        class="bg-blue-950 text-white px-4 py-2 rounded-3xl hover:bg-blue-900
+        {{ isText ? '' : 'opacity-50 cursor-not-allowed pointer-events-none' }}"
+        (click)="sendMessage()"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+<div class="flex justify-center items-center h-[500px]">
+  <div class="w-xl rounded overflow-hidden shadow-lg ">
+    <div class="px-6 py-4">
+      <div class="flex font-bold text-xl mb-5 items-center justify-center">Connect App</div>
+      <form [formGroup]="loginForm" class="flex flex-col space-y-4 w-80" (ngSubmit)="loginSubmit()">
+        <div class="flex flex-col">
+          <label for="phone" class="text-gray-700 mb-2">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter your Email" formControlName="email" class="rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+          <div *ngIf="loginForm.controls['email'].errors?.['required'] && loginForm.controls['email'].touched" class="text-red-500 m-2 text-sm">Email is required</div>
+          <div *ngIf="loginForm.controls['email'].errors?.['pattern'] && loginForm.controls['email'].touched" class="text-red-500 m-2 text-sm">Invalid email address</div>
+          </div>
+        <!-- <div class="flex flex-col">
+          <label for="password" class="text-gray-700 mb-2">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" class="rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+        </div> -->
+        <div class="flex items-center justify-between w-fit [view-transition-name:toolbar-text]" >
+          <a routerLink="/signup" class="text-blue-950 hover:underline" >New user?</a>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid" class="bg-neutral-50 text-black border border-blue-950 rounded-lg px-4 py-2 hover:bg-blue-950 transition duration-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-950">Sign in</button>
+      </form>
+    </div>
+  </div>
+</div>

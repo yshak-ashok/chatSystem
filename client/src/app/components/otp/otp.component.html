@@ -1,0 +1,28 @@
+<div class="flex justify-center items-center h-[500px]">
+  <div class="w-xl rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+      <div class="flex font-bold text-xl mb-5 items-center justify-center">Verify OTP</div>
+      <form [formGroup]="OTPForm" class="flex flex-col space-y-4 w-80" (ngSubmit)="verify()">
+        <div class="flex flex-col">
+     
+          <input type="text" id="otp" name="otp" placeholder="Enter OTP" formControlName="otp"
+            class="rounded-lg border  border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+          <div *ngIf="OTPForm.controls['otp'].errors?.['required'] && OTPForm.controls['otp'].touched"
+            class="text-red-500 m-2 text-sm">OTP is required</div>
+          <div *ngIf="OTPForm.controls['otp'].errors?.['pattern'] && OTPForm.controls['otp'].touched"
+            class="text-red-500 m-2 text-sm">Invalid OTP (should be 4 digits)</div>
+        </div>
+
+        <div class="flex items-center justify-between">
+
+          <button type="submit" class="bg-white text-blue-400 border border-none" (click)="resendOTP()">Resend</button>
+          
+        </div>
+       
+        <button type="submit" [disabled]="OTPForm.invalid"
+          class="bg-neutral-50 text-black border border-blue-950 rounded-lg px-4 py-2 hover:bg-blue-950 transition duration-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-950">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+</div>
